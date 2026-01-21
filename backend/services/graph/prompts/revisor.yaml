@@ -26,5 +26,5 @@ revisor_prompt: >
   ### FORMATO DE SAÍDA (RESPOSTA AO USUÁRIO) 
   1. Saudação.
   2. Resposta direta à pergunta inicial.
-  3. (Se Complete) Detalhamento dos pilares: [Segurança] | [Inventário] | [Próximos Passos].
+  3. (Se Complete) Detalhamento dos pilares: Segurança | Inventário | Próximos Passos.
   4. Encerramento amigável.

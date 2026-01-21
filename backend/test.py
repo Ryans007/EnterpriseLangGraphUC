@@ -7,24 +7,30 @@ from rich import print
 
 config = RunnableConfig(configurable={"thread_id": threading.get_ident()})
 
-def test_graph_invocation():
-    """Teste de invocação do grafo de estados"""
-    human_message = HumanMessage(content="Detalhe o Claude")
-    
-    # for s in graph.stream({
-    # 'messages': [human_message],
-    # }, config=config):
-    #     print(s)
-    
-    response = graph.invoke({"messages": [human_message]}, config=config)
-    
-    print(Markdown(response['messages'][-1].content))
-    print(Markdown("---"))
-    print("Estado do grafo após invocação:")
-    print(graph.get_state(config=config))
+def main():
+    print("Bot Comparador de Tecnologia Iniciado!")
+    print("Digite 'sair' para encerrar.\n")
 
+    while True:
+        msg = input("\nVocê: ")
+
+        if msg.lower() in ['sair', 'exit', 'quit']:
+            print("Até logo!")
+            break
+
+        if not msg.strip():
+            continue
+
+        # for s in graph.stream({
+        #     'messages': [HumanMessage(content=msg)],
+        # }, config=config):
+        #     print(s)
+
+        response = graph.invoke({'messages': [HumanMessage(content=msg)]}, config=config)
+        
+        print(Markdown(response['messages'][-1].content))
 if __name__ == "__main__":
-    test_graph_invocation()
+    main()
     
     
 

@@ -5,10 +5,30 @@ services:
       dockerfile: Dockerfile
     container_name: backend_service
     ports:
-      - "8000:8000"
+      - "${BACKEND_PORT}:8000"
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - TAVILY_API_KEY=${TAVILY_API_KEY}
     volumes:
       - ./backend:/backend
-  
+    networks:
+      - system_network
+
+  frontend:
+    build: ./frontend
+    container_name: frontend_service
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      VITE_BACKEND_PORT: ${BACKEND_PORT}
+    depends_on:
+      - backend
+    networks:
+      - system_network
+
+networks:
+  system_network:
+    driver: bridge
